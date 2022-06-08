@@ -10,10 +10,11 @@ const Container=styled.div`
     display: flex;
     align-items: center;
     overflow: hidden;
+    max-width:100%;
 `;
 
 const Wrapper=styled.div`
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     transition:1.2s all ease;
@@ -38,7 +39,7 @@ const InfoBox=styled.div`
     padding:10px;
 `;
 const Arrow=styled.div`
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.7);
     height: 40px;
     width: 40px;
     display: flex;
