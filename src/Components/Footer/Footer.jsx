@@ -10,7 +10,7 @@ padding: 10px;
 `;
 const Title=styled.h3`
 font-size: 30px;
-
+margin-bottom: 5px;
 `;
 const Desc=styled.div`
 margin: 5px;
@@ -34,6 +34,7 @@ flex: 1;
 padding: 10px;
 `;
 const Titlecenter=styled.h3`
+margin-bottom: 5px;
 `;
 const List=styled.ul`
 list-style: none;
@@ -49,7 +50,9 @@ flex: 1;
 margin: 5px;
 padding: 10px;
 `;
-const Info=styled.h3``;
+const Info=styled.h3`
+margin-bottom: 5px;
+`;
 const Infoitem=styled.div`
 display: flex;
 align-items: center;
