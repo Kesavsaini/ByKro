@@ -47,7 +47,7 @@ margin-top: 10px;
 `;
 const Right=styled.div`
 flex: 1;
-margin: 5px;
+margin:5px;
 padding: 10px;
 `;
 const Info=styled.h3`

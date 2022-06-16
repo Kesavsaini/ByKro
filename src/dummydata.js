@@ -69,3 +69,22 @@ export const productdata=[
         img:"http://assets.stickpng.com/images/580b57fbd9996e24bc43bf63.png"
     }
 ]
+export const cartdata=[{
+    id:9102901,
+    name:"Dennim Shoes",
+    img:"https://www.freepnglogos.com/uploads/shoes-png/dance-shoes-png-transparent-dance-shoes-images-5.png",
+    color:"orange",
+    size:28.30,
+    price:500,
+    count:2
+},
+{
+    id:92029056,
+    name:"Levis Hoodie",
+    img:"http://cdn.shopify.com/s/files/1/1656/2489/products/Martin_Garrix_MG_WO_03_01_Black_Back.png?v=1569204709",
+    color:"black",
+    size:56.90,
+    price:1200,
+    count:1
+}
+]
