@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { useState } from "react";
 import styled from "styled-components";
 import { slidedata } from "../../dummydata";
-
+import {mobile} from "../../responsive"
 const Container=styled.div`
     width: 100vw;
     height: 100vh;
@@ -11,6 +11,7 @@ const Container=styled.div`
     align-items: center;
     overflow: hidden;
     max-width:100%;
+    ${mobile({display:"none"})};
 `;
 
 const Wrapper=styled.div`

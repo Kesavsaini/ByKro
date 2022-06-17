@@ -1,19 +1,24 @@
 import { Email, Facebook, GitHub, Instagram, LocationOn, PhoneIphone, Twitter } from '@mui/icons-material';
 import styled from 'styled-components'
+import {mobile} from "../../responsive"
 const Container=styled.div`
     display: flex;
     margin-top: 10px;
+    ${mobile({height:"10px",flexDirection:"column"})};
 `;
 const Left=styled.div`
-flex: 1;
+flex: 2;
 padding: 10px;
+${mobile({flex:"7"})};
 `;
 const Title=styled.h3`
 font-size: 30px;
 margin-bottom: 5px;
+${mobile({fontSize:"20px"})};
 `;
 const Desc=styled.div`
 margin: 5px;
+${mobile({fontSize:"10px"})};
 `;
 const Icon=styled.div`
 display: flex;
@@ -32,6 +37,7 @@ cursor: pointer;
 const Center=styled.div`
 flex: 1;
 padding: 10px;
+${mobile({display:"none"})};
 `;
 const Titlecenter=styled.h3`
 margin-bottom: 5px;
@@ -49,6 +55,7 @@ const Right=styled.div`
 flex: 1;
 margin:5px;
 padding: 10px;
+${mobile({flex:"3",fontSize:"8px"})};
 `;
 const Info=styled.h3`
 margin-bottom: 5px;
@@ -57,6 +64,7 @@ const Infoitem=styled.div`
 display: flex;
 align-items: center;
 margin-top: 20px;
+${mobile({marginTop:"2px"})};
 `;
 const Payment=styled.img`
 width: 60%;
@@ -69,7 +77,7 @@ const Footer = () => {
         <Left>
             <Title>ByKro.</Title>
             <Desc> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum tempora minima sit doloribus voluptate, vel nesciunt a fugiat animi laboriosam reprehenderit pariatur corrupti dolores odit exercitationem ad porro perspiciatis alias. 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam beatae iste nemo eius natus doloremque
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam beatae iste nemo eius natus doloremque Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, necessitatibus! Lorem ipsum dolor sit.
             </Desc>
             <Icon>
                 <Socialicon bc={"#3b5998"}>

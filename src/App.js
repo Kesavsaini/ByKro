@@ -9,7 +9,7 @@ import Cart from "./Pages/Cart/Cart";
 const App=()=>{
   return(
     <>
-      <Cart/>
+      <Home/>
     </>
   )
 }
