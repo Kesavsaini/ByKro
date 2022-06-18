@@ -4,7 +4,8 @@ import Cartitem from '../../Components/Cartitem/Cartitem'
 import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
 import Newsletter from '../../Components/Newsletter/Newsletter'
-import { cartdata } from '../../dummydata'
+import { cartdata } from '../../dummydata';
+import { mobile } from '../../responsive'
 const Container=styled.div`
 `;
 const Tittle=styled.div`
@@ -20,6 +21,7 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 20px;
+${mobile({padding:"5px",justifyContent:"space-around"})};
 `;
 const Button=styled.button`
 border: none;
@@ -28,18 +30,21 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 background-color: ${props=>props.bg};
 color: ${props=>props.color};
 cursor: pointer;
+${mobile({padding:"10px 5px",fontSize:"12px"})};
 `;
 const Subcontainer=styled.div`
 display: flex;
+${mobile({display:"none"})};
 `;
 const Options=styled.div`
 margin:0px 10px;
 text-decoration: underline;
 cursor: pointer;
+${mobile({fontSize:"10px"})};
 `;
 const Bottom=styled.div`
 display: flex;
-
+${mobile({flexDirection:"column"})};
 width: 100vw;
 max-width: 100%;
 `;
@@ -58,6 +63,7 @@ padding: 20px;
 height:50vh;
 width: 20%;
 border-radius: 5px;
+${mobile({width:"80%",margin:"20px"})};
 `;
 const Sumtittle=styled.div`
 font-size: 30px;

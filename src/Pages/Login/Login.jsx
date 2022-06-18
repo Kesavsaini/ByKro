@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { mobile } from '../../responsive';
 const Container=styled.div`
 width: 100vw;
 height: 100vh;
@@ -16,6 +17,7 @@ display: flex;
 flex-direction: column;
 padding: 10px;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+${mobile({width:"80%"})}
 `;
 const Tittle=styled.h1`
 margin: 10px;

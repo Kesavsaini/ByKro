@@ -4,21 +4,26 @@ import Announcment from '../../Components/Announcment/Announcment'
 import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
 import Newsletter from '../../Components/Newsletter/Newsletter';
+import { mobile } from '../../responsive';
 const Wrapper=styled.div`
 display: flex;
+${mobile({flexDirection:"column"})}
 `;
 const Left=styled.div`
 flex: 1;
 padding: 40px;
+${mobile({padding:"10px"})}
 `;
 const Image=styled.img`
 width: 100%;
 height: 90vh;
 object-fit:cover;
+${mobile({height:"40vh"})}
 `;
 const Right=styled.div`
 flex:1;
 padding: 40px;
+${mobile({padding:"10px"})}
 `;
 const Title=styled.h1`
 font-weight: 200;
@@ -36,12 +41,14 @@ width: 50%;
 display: flex;
 align-items: center;
 justify-content: space-between;
+${mobile({width:"80%"})}
 `;
 const Filtercontainer=styled.div`
 width: 50%;
 display: flex;
 align-items: center;
 justify-content: space-between;
+${mobile({width:"80%",marginTop:"10px"})}
 `;
 const Filter=styled.div`
 display: flex;

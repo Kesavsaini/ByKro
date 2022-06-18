@@ -4,6 +4,7 @@ import Navbar from '../../Components/Navbar/Navbar'
 import Products from '../../Components/Products/Products'
 import Newsletter from '../../Components/Newsletter/Newsletter'
 import Footer from '../../Components/Footer/Footer';
+import { mobile } from '../../responsive'
 const Container=styled.div``;
 const Title=styled.h1`
 margin: 10px;
@@ -18,12 +19,16 @@ display:flex;
 align-items: center;
 margin: 10px;
 `;
-const Filtertext=styled.h3``;
+const Filtertext=styled.h3`
+${mobile({display:"none"})}
+`;
 const Select=styled.select`
 padding: 7px;
 margin-left: 10px;
+${mobile({marginLeft:"10px",fontSize:"10px"})}
 `;
-const Option=styled.option``;
+const Option=styled.option`
+`;
 const ProductList = () => {
   return (
     <>
