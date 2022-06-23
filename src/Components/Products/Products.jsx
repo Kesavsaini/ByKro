@@ -10,7 +10,8 @@ const Container=styled.div`
     flex-wrap: wrap;
     ${mobile({padding:"1px"})};
 `;
-const Products=()=> {
+const Products=({cat,filter,sort})=> {
+  
   return (
     <Container>
         {productdata.map((item)=>{
