@@ -3,7 +3,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Badge } from "@mui/material";
 import Logoimg from "./Logo.png";
-import {mobile} from "../../responsive"
+import {mobile} from "../../responsive";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import {Link} from "react-router-dom";
 const Container=styled.div`
 `;
 const Wrapper=styled.div`
@@ -61,6 +63,7 @@ const MenuItem=styled.div`
     cursor: pointer;
 `
 const Navbar = () => {
+    const cartNumber=useSelector(state=>state.cart.quantity);
   return (
     <Container>
         <Wrapper>
@@ -77,11 +80,13 @@ const Navbar = () => {
             <Right>
                 <MenuItem>Register</MenuItem>
                 <MenuItem>SIGN IN</MenuItem>
+                <Link to="/cart" style={{color:"black"}}>
                 <MenuItem>
-                <Badge badgeContent={2} color="primary">
+                <Badge badgeContent={cartNumber} color="primary">
                    <ShoppingCartOutlinedIcon/>
                  </Badge>
                 </MenuItem>
+                </Link>
             </Right>
         </Wrapper>
     </Container>

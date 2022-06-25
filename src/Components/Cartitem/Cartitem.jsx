@@ -72,16 +72,16 @@ const Cartitem = ({item}) => {
           <Image src={item.img}/>
           </Imagebox>
           <Details>
-            <Info><b>Product: </b>{item.name}</Info>
-            <Info><b>ID: </b>{item.id}</Info>
-             <Color color={item.color}></Color>
-            <Info><b>Size </b>{item.size}</Info>
+            <Info><b>Product: </b>{item.title}</Info>
+            <Info><b>ID: </b>{item._id}</Info>
+             <Color color={item.productcolor}></Color>
+            <Info><b>Size </b>{item.productsize}</Info>
           </Details>
         </Left>
         <Right>
             <Count>
                 <Add style={{fontSize:"30px"}}/>
-                <Number>{item.count}</Number>
+                <Number>{item.quant}</Number>
                 <Remove style={{fontSize:"30px"}}/>
             </Count>
             <Price>₹{item.price}</Price>

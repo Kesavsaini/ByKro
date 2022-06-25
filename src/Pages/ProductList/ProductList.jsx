@@ -34,12 +34,12 @@ const Option=styled.option`
 const ProductList = () => {
   const location=useLocation();
   const cat=location.pathname.split("/")[2];
-  const [filter,setFilter]=useState({});
+  const [filters,setFilters]=useState({});
   const [sort,setSort]=useState("newest");
   const handleFilter=(e)=>{
     const value=e.target.value;
-    setFilter({
-      ...filter,
+    setFilters({
+      ...filters,
       [e.target.name]:value,
     });
 }
@@ -48,7 +48,7 @@ const ProductList = () => {
     <Navbar/>
     <Announcment/>
     <Container>
-    <Title>Shirts</Title>
+    <Title>{cat}</Title>
     <Filterbox>
         <Filter>
             <Filtertext>Filter Products</Filtertext>
@@ -59,6 +59,7 @@ const ProductList = () => {
                     <Option>Blue</Option>
                     <Option>Green</Option>
                     <Option>Yellow</Option>
+                    <Option>Red</Option>
                 </Select>
                 <Select name='size' onChange={handleFilter}>
                     <Option selected disabled>Size</Option>
@@ -78,7 +79,7 @@ const ProductList = () => {
           </Select>
         </Filter>
     </Filterbox>
-    <Products cat={cat} filter={filter} sort={sort}/>
+    <Products cat={cat} filters={filters} sort={sort}/>
     </Container>
     <Newsletter/>
     <Footer/>

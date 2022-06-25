@@ -5,7 +5,9 @@ import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
 import Newsletter from '../../Components/Newsletter/Newsletter'
 import { cartdata } from '../../dummydata';
-import { mobile } from '../../responsive'
+import { mobile } from '../../responsive';
+import {useSelector} from "react-redux"
+import StripeCheckout from "react-stripe-checkout"
 const Container=styled.div`
 `;
 const Tittle=styled.div`
@@ -91,6 +93,7 @@ cursor: pointer;
 border-radius: 30px;
 `;
 const Cart = () => {
+  const cart=useSelector(state=>state.cart);
   return (
     <>
     <Navbar/>
@@ -108,7 +111,7 @@ const Cart = () => {
         <Bottom>
           <Products>
             {
-              cartdata.map((item,index)=>{
+              cart.product && cart.product.map((item,index)=>{
                 return(
                   <>
                   <Cartitem item={item}/>
@@ -122,7 +125,7 @@ const Cart = () => {
              <Sumtittle>ORDER SUMMARY</Sumtittle>
              <Info>
                 <Infotitle>Subtotal</Infotitle>
-                <Money>₹1700</Money>
+                <Money>₹{cart.total}</Money>
              </Info>
              <Info>
                 <Infotitle>Estemeted Shopping</Infotitle>
@@ -134,9 +137,21 @@ const Cart = () => {
              </Info>
              <Info>
                 <Infotitle style={{fontWeight:"600",fontSize:"30px"}}>Total</Infotitle>
-                <Money style={{fontWeight:"600",fontSize:"30px"}}>₹1617</Money>
+                <Money style={{fontWeight:"600",fontSize:"30px"}}>₹{cart.total+17-100}</Money>
              </Info>
+             <StripeCheckout 
+               name="Bykro"
+               image=""
+               billingAdress
+               shippingAdress
+               description={`Your total is ₹${cart.total+17-100}`}
+               amount={(cart.total+17-100)*100}
+               token={onToken}
+               currency="INR"
+              //  stripeKey=
+             >
              <Checkout>CHECKOUT NOW</Checkout>
+             </StripeCheckout>
           </Summary>
         </Bottom>
     </Container>

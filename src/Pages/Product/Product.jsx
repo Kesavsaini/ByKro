@@ -1,10 +1,15 @@
 import { Add, Remove } from '@mui/icons-material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components'
 import Announcment from '../../Components/Announcment/Announcment'
 import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
 import Newsletter from '../../Components/Newsletter/Newsletter';
+import { updateCart } from '../../redux/CartRedux';
 import { mobile } from '../../responsive';
+import {useDispatch} from "react-redux";
 const Wrapper=styled.div`
 display: flex;
 ${mobile({flexDirection:"column"})}
@@ -97,47 +102,79 @@ cursor: pointer;
     background-color: #e2e2e2;
 }
 `;
-const Product = () => {
+const Product=()=>{
+const location=useLocation();
+const id=location.pathname.split("/")[2];
+const [product,setProduct]=useState({});
+const [quant,setQuant]=useState(1);
+const [productcolor,setProductcolor]=useState();
+const [productsize,setProductsize]=useState();
+const dispatch=useDispatch();
+useEffect(()=>{
+    const getProduct=async()=>{
+        try{
+         const res=await axios.get(`http://localhost:5000/api/products/getproduct/${id}`);
+         console.log(res);
+         setProduct(res.data);
+        }catch(err){
+            console.log(err);
+        }
+    }
+    getProduct();
+})
+const handleClick=()=>{
+    dispatch(updateCart({...product,quant,productcolor,productsize,price:product.price}));
+}
   return (
     <>
     <Navbar/>
     <Announcment/>
      <Wrapper>
         <Left>
-           <Image src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFzaGlvbiUyMG1vZGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'/>
+           <Image src={product.img}/>
         </Left>
         <Right>
-            <Title>Rozen Jackate</Title>
+            <Title>{product.title}</Title>
             <Desc> 
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat perferendis eaque tenetur quam fugiat obcaecati perspiciatis vitae. Incidunt ipsum cum obcaecati quasi eius accusantium, ducimus dignissimos nam, rerum maxime reiciendis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, nulla?
+                {product.desc}
             </Desc>
-            <Price>₹4000/-</Price>
+            <Price>₹{product.price}/-</Price>
             <Filtercontainer>
                 <Filter>
                     <FilterTittle>Color</FilterTittle>
-                    <FilterColor color="Yellow"></FilterColor>
-                    <FilterColor color="Black"></FilterColor>
-                    <FilterColor color="Blue"></FilterColor>
+                    {
+                      product.color && product.color.map((color)=>{
+                           if(color){
+                            return(
+                                <FilterColor color={color} key={color} onClick={()=>setProductcolor(color)}></FilterColor>
+                            );
+                           }
+                        })
+                    }
                 </Filter>
                 <Filter>
                 <FilterTittle>Size</FilterTittle>
-                <Select>
+                <Select onClick={(e)=>setProductsize(e.target.value)}>
                     <Option selected disabled>Size</Option>
-                    <Option>M</Option>
-                    <Option>L</Option>
-                    <Option>X</Option>
-                    <Option>XL</Option>
-                    <Option>XXL</Option>
+                    {
+                      product.size && product.size.map((sz)=>{
+                           if(sz){
+                            return(
+                                <Option >{sz}</Option>
+                            );
+                           }
+                        })
+                    }
                 </Select>
                 </Filter>
             </Filtercontainer>
             <Addcontainer>
                 <Additem>
-                    <Remove/>
-                     <Addnumber>1</Addnumber>
-                    <Add/>
+                    <Remove onClick={()=>setQuant(quant>2?quant-1:1)} style={{cursor:"pointer"}}/>
+                     <Addnumber>{quant}</Addnumber>
+                    <Add onClick={()=>setQuant(quant+1)} style={{cursor:"pointer"}}/>
                 </Additem>
-                <AddtoCart>ADD TO CART</AddtoCart>
+                <AddtoCart onClick={handleClick}>ADD TO CART</AddtoCart>
             </Addcontainer>
         </Right>
      </Wrapper>
