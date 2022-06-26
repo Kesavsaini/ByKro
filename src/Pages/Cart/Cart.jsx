@@ -8,6 +8,8 @@ import { cartdata } from '../../dummydata';
 import { mobile } from '../../responsive';
 import {useSelector} from "react-redux"
 import StripeCheckout from "react-stripe-checkout"
+import { useEffect, useState } from 'react';
+import axios from "axios";
 const Container=styled.div`
 `;
 const Tittle=styled.div`
@@ -94,6 +96,31 @@ border-radius: 30px;
 `;
 const Cart = () => {
   const cart=useSelector(state=>state.cart);
+  const key="pk_test_51LEWozSGTyh3edWhqmkcFFRzrESifseF3zBKqD7jIRed8zDSLN4npsNzIg3dI9UQSwPNg9o9mqD24ToOgbUp8G5B00q777qZgP";
+  const [stripeToken,setStripeToken]=useState(null);
+  const onToken=(token)=>{
+    setStripeToken(token);
+  }
+  useEffect(()=>{
+    const Dopayment=async()=>{
+        let config={
+          headers:{
+            Authorization:'Bearer sk_test_51LEWozSGTyh3edWh8QxbSe9atVbmvZBOIhi3V0O3gAd0QFG9XkXxcTqIvqGDgloKSzG0jpnopGLin0nINYkHcXmn00JyqQuWx9'
+          }
+        }
+      try{
+          const res=await axios.post("http://localhost:5000/api/checkout/payment",{
+            tokenId:stripeToken.id,
+            amount:cart.total+17-100
+          },config);
+          console.log(res.data);
+      }catch(err){
+          console.log(err);
+      }
+    }
+    stripeToken && Dopayment();
+  },[stripeToken,cart])
+  
   return (
     <>
     <Navbar/>
@@ -142,13 +169,13 @@ const Cart = () => {
              <StripeCheckout 
                name="Bykro"
                image=""
-               billingAdress
-               shippingAdress
+               billingAddress
+               shippingAddress
                description={`Your total is ₹${cart.total+17-100}`}
                amount={(cart.total+17-100)*100}
                token={onToken}
                currency="INR"
-              //  stripeKey=
+              stripeKey={key}
              >
              <Checkout>CHECKOUT NOW</Checkout>
              </StripeCheckout>

@@ -1,5 +1,11 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components'
+import { loginError, loginStart, loginSucsess } from '../../redux/UserRedux';
 import { mobile } from '../../responsive';
+import axios from "axios";
+import { useSelector } from 'react-redux';
+import { CircularProgress } from '@mui/material';
 const Container=styled.div`
 width: 100vw;
 height: 100vh;
@@ -30,7 +36,8 @@ outline: none;
 margin: 10px;
 `;
 const Button=styled.button`
-padding: 15px 35px;
+width:95%;
+height: 40px;
 margin: 10px;
 background-color: white;
 background-color: red;
@@ -45,17 +52,44 @@ font-size: 12px;
 cursor: pointer;
 color: blue;
 `
-const Register = () => {
+const Error=styled.div`
+  color:red;
+  margin: 2px 10px;
+`;
+const Login = () => {
+  const dispatch=useDispatch();
+  const [password,setPassword]=useState("");
+  const [username,setUsername]=useState("");
+  const {isFetching,isError}=useSelector(state=>state.user)
+  const handleLogin=()=>{
+    const DoLogin=async()=>{
+      dispatch(loginStart());
+      try {
+        const res=await axios.post("http://localhost:5000/api/auth/login",{username,password});
+        dispatch(loginSucsess(res.data));
+        console.log(res.data)
+      } catch (err) {
+         dispatch(loginError()); 
+         console.log(err)
+      }
+    }
+    DoLogin();
+  }
   return (
     <>
     <Container>
         <Wrapper>
             <Tittle>SIGN IN</Tittle>
             <Form>
-                <Input placeholder='Username'/>
-                <Input type="password" placeholder='Password'/>
+                <Input placeholder='Username' onChange={(e)=>setUsername(e.target.value)}/>
+                <Input type="password" placeholder='Password' onChange={(e)=>setPassword(e.target.value)}/>
             </Form>
-            <Button>Login</Button>
+            <Button onClick={handleLogin} disabled={isFetching}>
+              {isFetching ? <CircularProgress style={{color:"white",width:"30px",height:"30px"}}/>:"Login"}
+            </Button>
+            {isError &&
+              <Error>Somthing went wrong...</Error>
+            }
             <Link>Forget Password?</Link>
             <Link>Create Account</Link>
         </Wrapper>
@@ -64,4 +98,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login
