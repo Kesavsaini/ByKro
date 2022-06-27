@@ -5,7 +5,8 @@ import { Badge } from "@mui/material";
 import Logoimg from "./Logo.png";
 import {mobile} from "../../responsive";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import {Link} from "react-router-dom";
+import {Link, Navigate,useNavigate} from "react-router-dom";
+import { useState } from "react";
 const Container=styled.div`
 `;
 const Wrapper=styled.div`
@@ -63,6 +64,11 @@ const MenuItem=styled.div`
     cursor: pointer;
 `
 const Navbar = () => {
+    const navigate = useNavigate();
+    const [searchtext,setSearchtext]=useState("");
+    const handleSearch=()=>{
+            navigate(`/products/${searchtext}`);
+    }
     const cartNumber=useSelector(state=>state.cart.quantity);
   return (
     <Container>
@@ -70,16 +76,20 @@ const Navbar = () => {
             <Left>
               <Language>EN</Language>
               <Searchbox>
-                <Input placeholder="Search"></Input>
-                <SearchIcon style={{cursor:"pointer"}}/>
+                <Input placeholder="Search" onChange={(e)=>setSearchtext(e.target.value)}></Input>
+                <SearchIcon style={{cursor:"pointer"}} onClick={handleSearch}/>
               </Searchbox>
             </Left>
             <Center> 
                 <Logo src={Logoimg}/>
             </Center>
             <Right>
+               <Link to="/signup" style={{color:"black",textDecoration:"none"}}>
                 <MenuItem>Register</MenuItem>
+                </Link>
+                <Link to="/login" style={{color:"black",textDecoration:"none"}}>
                 <MenuItem>SIGN IN</MenuItem>
+                </Link>
                 <Link to="/cart" style={{color:"black"}}>
                 <MenuItem>
                 <Badge badgeContent={cartNumber} color="primary">

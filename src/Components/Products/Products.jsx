@@ -5,6 +5,7 @@ import {mobile} from "../../responsive"
 import { useEffect } from 'react';
 import axios from "axios"
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 const Container=styled.div`
     padding: 20px;
     display: flex;
@@ -14,6 +15,7 @@ const Container=styled.div`
     ${mobile({padding:"1px"})};
 `;
 const Products=({cat,filters,sort})=> {
+  const Authtoken=useSelector(state=>state.user.userInfo.token);
   const [products,setProducts]=useState([]);
   const [filteredProducts,setfilteredProducts]=useState([]);
   useEffect(()=>{
@@ -21,7 +23,7 @@ const Products=({cat,filters,sort})=> {
       try{
         let config = {
           headers: {
-            token:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjA1ZjA3ZjI4ZmUyZWQ3ODY5OTg2MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NTg4NTYwNCwiZXhwIjoxNjU2NDkwNDA0fQ.f-a5LjW4dmq7XDTpLahkZmsqMMUz-BHiLZviANwGG64",
+            token:"Bearer "+Authtoken,
           }
         }
         const res=await axios.get(cat ?`http://localhost:5000/api/products/getallproduct?category=${cat}`:"http://localhost:5000/api/products/getallproduct",config);

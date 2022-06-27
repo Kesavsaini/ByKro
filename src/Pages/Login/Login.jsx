@@ -6,6 +6,7 @@ import { mobile } from '../../responsive';
 import axios from "axios";
 import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import {Link} from 'react-router-dom';
 const Container=styled.div`
 width: 100vw;
 height: 100vh;
@@ -46,7 +47,7 @@ border: none;
 cursor: pointer;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
-const Link=styled.a`
+const LINK=styled.a`
 margin: 2px 10px;
 font-size: 12px;
 cursor: pointer;
@@ -90,8 +91,10 @@ const Login = () => {
             {isError &&
               <Error>Somthing went wrong...</Error>
             }
-            <Link>Forget Password?</Link>
-            <Link>Create Account</Link>
+            <LINK>Forget Password?</LINK>
+             <Link to="/signup" >
+            <LINK>Create Account</LINK>
+            </Link>
         </Wrapper>
     </Container>
     </>
