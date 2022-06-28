@@ -1,6 +1,9 @@
 import { Send } from "@mui/icons-material";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components"
-import {mobile} from "../../responsive"
+import {mobile} from "../../responsive";
+import emailjs from '@emailjs/browser';
 const Container=styled.div`
     height: 70vh;
     background-color:#F7EEEE;
@@ -50,13 +53,24 @@ cursor: pointer;
 ${mobile({flex:"2"})};
 `;
 const Newsletter = () => {
+  const name=useSelector(state=>state.user.userInfo.name);
+  const [template,setTemp]=useState({name:name,message:"Hello Guys Greetings from Byrko You will now get notify for Latest Products",email:""});
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs.send('service_bel9gj1', 'template_qej0sva',template, 'QGXJnwPjIxGEAGBd6')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
   return (
     <Container>
         <Title>Newsletter</Title>
         <Desc>Get Timely Update for Your Faviourt Products.</Desc>
         <IntputContainer>
-            <Input placeholder="Your Email"/>
-            <Button>
+            <Input placeholder="Your Email" onChange={(e)=>setTemp({...template,email:e.target.value})}/>
+            <Button onClick={sendEmail}>
                 <Send/>
             </Button>
         </IntputContainer>

@@ -67,7 +67,9 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [searchtext,setSearchtext]=useState("");
     const handleSearch=()=>{
+           if(searchtext.length>0){
             navigate(`/products/${searchtext}`);
+           }
     }
     const cartNumber=useSelector(state=>state.cart.quantity);
   return (
