@@ -7,6 +7,9 @@ import {mobile} from "../../responsive";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {Link, Navigate,useNavigate} from "react-router-dom";
 import { useState } from "react";
+import { Logout } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/UserRedux";
 const Container=styled.div`
 `;
 const Wrapper=styled.div`
@@ -62,8 +65,15 @@ const Searchbox=styled.div`
 const MenuItem=styled.div`
     margin-left: 25px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 const Navbar = () => {
+    const dispatch=useDispatch();
+    const LOGOUT=()=>{
+       dispatch(logOut());
+    }
     const navigate = useNavigate();
     const [searchtext,setSearchtext]=useState("");
     const handleSearch=()=>{
@@ -82,21 +92,25 @@ const Navbar = () => {
                 <SearchIcon style={{cursor:"pointer"}} onClick={handleSearch}/>
               </Searchbox>
             </Left>
+            <Link to="/">
             <Center> 
                 <Logo src={Logoimg}/>
             </Center>
+            </Link>
             <Right>
-               <Link to="/signup" style={{color:"black",textDecoration:"none"}}>
-                <MenuItem>Register</MenuItem>
-                </Link>
-                <Link to="/login" style={{color:"black",textDecoration:"none"}}>
-                <MenuItem>SIGN IN</MenuItem>
-                </Link>
                 <Link to="/cart" style={{color:"black"}}>
-                <MenuItem>
+                <MenuItem >
                 <Badge badgeContent={cartNumber} color="primary">
                    <ShoppingCartOutlinedIcon/>
                  </Badge>
+                </MenuItem>
+                </Link>
+                <Link to="/signup" style={{color:"black",textDecoration:"none"}}>
+                <MenuItem>Register</MenuItem>
+                </Link>
+                <Link to="/login" style={{color:"black",textDecoration:"none"}}>
+                <MenuItem onClick={LOGOUT}>
+                <Logout/>
                 </MenuItem>
                 </Link>
             </Right>

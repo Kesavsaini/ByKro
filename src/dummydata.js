@@ -26,18 +26,18 @@ export const slidedata=[
 export const categories=[{
     img:"https://images.unsplash.com/photo-1619785292559-a15caa28bde6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8ZmFzaGlvbiUyMG1vZGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
     title:"Winter Wear",
-    cat:"women"
+    cat:"men"
 },
 
 {
     img:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Z2lybCUyMG1vZGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
     title:"T-shirt Season",
-    cat:"women"
+    cat:"men"
 },
 {
     img:"https://images.unsplash.com/photo-1564485377539-4af72d1f6a2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Z2lybCUyMG1vZGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
     title:"Cool Jackates",
-    cat:"women"
+    cat:"men"
 
 }
 ]

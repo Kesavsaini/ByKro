@@ -61,13 +61,13 @@ const Product=({item})=>{
        <Circle/>
            <Image src={item.img}/>
            <Info>
+           <Link to={`/product/${item._id}`} style={{textDecoration:"none",color:"black"}}>
                <Icon>
                <ShoppingCartOutlined/>
                </Icon>
+               </Link>
                <Icon>
-                <Link to={`/product/${item._id}`} style={{textDecoration:"none",color:"black"}}>
                  <SearchOutlined/>
-                </Link>
                </Icon>
                <Icon>
                <FavoriteBorderOutlined/>

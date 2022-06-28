@@ -1,5 +1,7 @@
-import { Add, Remove } from '@mui/icons-material';
+import { Add, Delete, Remove } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { deleteCart } from '../../redux/CartRedux';
 import { mobile } from '../../responsive';
 const Container=styled.div`
 display: flex;
@@ -63,7 +65,24 @@ margin-top: 20px;
 ${mobile({fontSize:"20px"})};
 ${mobile({marginTop:"0px"})};
 `;
-const Cartitem = ({item}) => {
+const Del=styled.button`
+background-color:black;
+border: none;
+color: white;
+padding:5px 20px;
+margin-top: 20px;
+border-radius: 5px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+cursor: pointer;
+&:hover{
+  background-color: red;
+}
+`;
+const Cartitem = ({item,idx}) =>{
+  const dispatch=useDispatch();
+  const Deletitem=()=>{
+     dispatch(deleteCart({idx,quant:item.quant,price:item.price}));
+  }
   return (
     <>
     <Container>
@@ -85,6 +104,9 @@ const Cartitem = ({item}) => {
                 <Remove style={{fontSize:"30px"}}/>
             </Count>
             <Price>₹{item.price}</Price>
+            <Del onClick={Deletitem}>
+              <Delete/>
+            </Del>
         </Right>
     </Container>
     </>

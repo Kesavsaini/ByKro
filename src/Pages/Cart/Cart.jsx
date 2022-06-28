@@ -94,7 +94,7 @@ padding: 15px 25px;
 cursor: pointer;
 border-radius: 30px;
 `;
-const Cart = () => {
+const Cart =()=> {
   const cart=useSelector(state=>state.cart);
   const key="pk_test_51LEWozSGTyh3edWhqmkcFFRzrESifseF3zBKqD7jIRed8zDSLN4npsNzIg3dI9UQSwPNg9o9mqD24ToOgbUp8G5B00q777qZgP";
   const [stripeToken,setStripeToken]=useState(null);
@@ -141,8 +141,8 @@ const Cart = () => {
               cart.product && cart.product.map((item,index)=>{
                 return(
                   <>
-                  <Cartitem item={item}/>
-                  {index<cartdata.length-1 && <Line/>}
+                  <Cartitem item={item} idx={index}/>
+                  {index<cart.product.length-1 && <Line/>}
                   </>
                 );
               })
@@ -156,22 +156,22 @@ const Cart = () => {
              </Info>
              <Info>
                 <Infotitle>Estemeted Shopping</Infotitle>
-                <Money>₹17</Money>
+                <Money>₹0</Money>
              </Info>
              <Info>
                 <Infotitle>Shopping Discount</Infotitle>
-                <Money>-₹100</Money>
+                <Money>₹0</Money>
              </Info>
              <Info>
                 <Infotitle style={{fontWeight:"600",fontSize:"30px"}}>Total</Infotitle>
-                <Money style={{fontWeight:"600",fontSize:"30px"}}>₹{cart.total+17-100}</Money>
+                <Money style={{fontWeight:"600",fontSize:"30px"}}>₹{cart.total}</Money>
              </Info>
              <StripeCheckout 
                name="Bykro"
                image=""
                billingAddress
                shippingAddress
-               description={`Your total is ₹${cart.total+17-100}`}
+               description={`Your total is ₹${cart.total}`}
                amount={(cart.total+17-100)*100}
                token={onToken}
                currency="INR"
